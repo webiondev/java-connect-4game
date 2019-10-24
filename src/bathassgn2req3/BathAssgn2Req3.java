@@ -1,13 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This program represents a ConnectN game
  */
 package bathassgn2req3;
 
 /**
- *
- * @author rahma
+ * This class is the main entry point for the game
  */
 public class BathAssgn2Req3 {
 
@@ -15,8 +12,15 @@ public class BathAssgn2Req3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        new Game().startGame();
+        // check if command ine argument given
+        if (args.length == 1) {
+            new Game().startGame(args[0]);
+        } else if (args.length == 0) {
+            new Game().startGame("");
+        } else {
+            System.out.println("Enter zero or one value in command line");
+        }
+
     }
-    
+
 }

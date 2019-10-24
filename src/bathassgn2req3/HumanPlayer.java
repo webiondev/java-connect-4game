@@ -1,18 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This program represents the human player functionality
  */
 package bathassgn2req3;
 
-/**
- *
- * @author rahma
- */
 import java.util.*;
 
 /**
- *
+ * The human player class
  */
 public class HumanPlayer extends Player {
 
@@ -22,24 +16,36 @@ public class HumanPlayer extends Player {
     Scanner playerChoice;
 
     public HumanPlayer() {
+
         playerChoice = new Scanner(System.in);
+
     }
 
     /**
-     * returns the column chosen
+     * allow player to choose column
      *
-     * @return integer
+     * @return player choice
      */
     public int chooseColumn() {
 
-        return playerChoice.nextInt();
+        int choice = playerChoice.nextInt();;
+
+        while (choice < 1 || choice > 7) {
+            System.out.print("between 1 and 7: ");
+            choice = playerChoice.nextInt();
+        }
+
+        return choice;
 
     }
 
     /**
-     * returns the column placed
+     * place counter for human player
      *
-     * @return integer
+     * @param move made
+     * @param player color
+     * @param board
+     * @return board object
      */
     public Board placeCounter(int move, char player, Board board) {
         boolean placed = false;
@@ -49,7 +55,7 @@ public class HumanPlayer extends Player {
 
                 for (int j = 0; j < board.getColumn(); j++) {
                     if (!placed) {
-                        if (board.getBoard(i, move - 1) == 'y') {
+                        if (board.getBoard(i, move - 1) == 'y' || board.getBoard(i, move - 1) == 'b') {
 
                             continue;
 
@@ -57,6 +63,7 @@ public class HumanPlayer extends Player {
                             //System.out.print("i: "+i+" j: "+j);
                             placed = true;
                             board.setBoard(i, move - 1, 'r');
+                            this.moves++;
 
                         }
                     }
@@ -65,13 +72,12 @@ public class HumanPlayer extends Player {
 
             }
 
-        }//player r
-        else {
+        }//player y
+        else if (player == 'y') {
             for (int i = board.getRow() - 1; i >= 0; i--) {
-
                 for (int j = 0; j < board.getColumn(); j++) {
                     if (!placed) {
-                        if (board.getBoard(i, move - 1) == 'r') {
+                        if (board.getBoard(i, move - 1) == 'r' || board.getBoard(i, move - 1) == 'b') {
 
                             continue;
 
@@ -79,7 +85,7 @@ public class HumanPlayer extends Player {
                             //System.out.print("i: "+i+" j: "+j);
                             placed = true;
                             board.setBoard(i, move - 1, 'y');
-
+                            this.moves++;
                         }
                     }
 
@@ -87,6 +93,27 @@ public class HumanPlayer extends Player {
 
             }
 
+        } else if (player == 'b') {
+            for (int i = board.getRow() - 1; i >= 0; i--) {
+                for (int j = 0; j < board.getColumn(); j++) {
+                    if (!placed) {
+                        if (board.getBoard(i, move - 1) == 'r' || board.getBoard(i, move - 1) == 'y') {
+
+                            continue;
+
+                        } else if (board.getBoard(i, move - 1) != 'b') {
+                            //System.out.print("i: "+i+" j: "+j);
+                            placed = true;
+                            board.setBoard(i, move - 1, 'b');
+                            this.moves++;
+                        }
+                    }
+
+                }
+
+            }
+        } else if (this.moves == 42) {
+            System.out.println("Board full! No winners!");
         }
 
         return board;

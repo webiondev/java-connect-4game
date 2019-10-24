@@ -1,3 +1,6 @@
+/*
+ * This program represents the board functionality
+ */
 package bathassgn2req3;
 
 /**
@@ -7,7 +10,7 @@ package bathassgn2req3;
 import java.util.*;
 
 /**
- *
+ * The board class
  */
 public class Board {
 
@@ -23,179 +26,102 @@ public class Board {
     }
 
     /**
-     * check diagonal win
+     * check diagonal wins
      *
+     * @param color type
      * @return boolean
      */
-    public boolean checkDiagonal() {
-        // TODO implement here
+    public boolean checkDiagonal(char color) {
+
         boolean hasWon = false;
-        int count1 = 0;
-        int count2 = 0;
+        int count = 0;
+
         //top down left diagonal  
         for (int time = 0, diag = 0; time < board.length; time++, diag++) {
-            if (board[time][diag] == 'r') {
-                count1 = count1 + 1;
-                if (count1 == 4) {
+            if (board[time][diag] == color) {
+                count = count + 1;
+                if (count == 4) {
+
                     hasWon = true;
+                    return hasWon;
                 }
             } else {
-                count1 = 0;
+                count = 0;
             }
-            if (hasWon == true) {
-                break;
-            }
+
         }
 
         //bottum up left diagonal
         for (int time = board.length - 1, diag = 0; time >= 0; time--, diag++) {
-            if (board[time][diag] == 'r') {
-                count1 = count1 + 1;
-                if (count1 == 4) {
+            if (board[time][diag] == color) {
+                count = count + 1;
+                if (count == 4) {
                     hasWon = true;
+                    return hasWon;
                 }
             } else {
-                count1 = 0;
+                count = 0;
             }
-            if (hasWon == true) {
-                break;
-            }
+
         }
 
         //top down right diagonal
         for (int time = 0, diag = board[0].length - 1; time < board.length; time++, diag--) {
-            if (board[time][diag] == 'r') {
-                count1 = count1 + 1;
-                if (count1 == 4) {
+            if (board[time][diag] == color) {
+                count = count + 1;
+                if (count == 4) {
                     hasWon = true;
+                    return hasWon;
                 }
             } else {
-                count1 = 0;
+                count = 0;
             }
-            if (hasWon == true) {
-                break;
-            }
+
         }
         //bottom up right diagonal
         for (int time = board.length - 1, diag = board[0].length - 1; time >= 0; time--, diag--) {
-            if (board[time][diag] == 'r') {
-                count1 = count1 + 1;
-                if (count1 == 4) {
+            if (board[time][diag] == color) {
+                count = count + 1;
+                if (count == 4) {
                     hasWon = true;
+                    return hasWon;
                 }
             } else {
-                count1 = 0;
+                count = 0;
             }
-            if (hasWon == true) {
-                break;
-            }
+
         }
 
-        //top down left diagonal  
-        for (int time = 0, diag = 0; time < board.length; time++, diag++) {
-            if (board[time][diag] == 'y') {
-                count2 = count2 + 1;
-                if (count2 == 4) {
-                    hasWon = true;
-                }
-            } else {
-                count2 = 0;
-            }
-            if (hasWon == true) {
-                break;
-            }
-        }
-
-        //bottum up left diagonal
-        for (int time = board.length - 1, diag = 0; time >= 0; time--, diag++) {
-            if (board[time][diag] == 'y') {
-                count2 = count2 + 1;
-                if (count2 == 4) {
-                    hasWon = true;
-                }
-            } else {
-                count2 = 0;
-            }
-            if (hasWon == true) {
-                break;
-            }
-        }
-
-        //top down right diagonal
-        for (int time = 0, diag = board[0].length - 1; time < board.length; time++, diag--) {
-            if (board[time][diag] == 'y') {
-                count2 = count2 + 1;
-                if (count2 == 4) {
-                    hasWon = true;
-                }
-            } else {
-                count2 = 0;
-            }
-            if (hasWon == true) {
-                break;
-            }
-        }
-        //bottom up right diagonal
-        for (int time = board.length - 1, diag = board[0].length - 1; time >= 0; time--, diag--) {
-            if (board[time][diag] == 'y') {
-                count2 = count2 + 1;
-                if (count2 == 4) {
-                    hasWon = true;
-                }
-            } else {
-                count2 = 0;
-            }
-            if (hasWon == true) {
-                break;
-            }
-        }
         return hasWon;
     }
 
     /**
      * check horizontal win
      *
+     * @param color type
      * @return boolean
      */
-    public boolean checkHorizontal() {
-        // TODO implement here
+    public boolean checkHorizontal(char color) {
+
         boolean hasWon = false;
-        int count1 = 0;
-        int count2 = 0;
+        int count = 0;
+
         // check horizontal
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] == 'r') {
-                    count1 = count1 + 1;
+                if (board[i][j] == color) {
+                    count = count + 1;
 
-                    if (count1 == 4) {
+                    if (count == 4) {
                         hasWon = true;
+                        return hasWon;
 
                     }
                 } else {
-                    count1 = 0;
+                    count = 0;
                 }
             }
-            if (hasWon == true) {
-                break;
-            }
 
-        }
-
-        for (int i = 0; i < board[0].length; i++) {
-            for (int j = 0; j < board.length; j++) {
-                if (board[j][i] == 'y') {
-                    count2 = count2 + 1;
-                    if (count2 == 4) {
-                        hasWon = true;
-                    }
-                } else {
-                    count2 = 0;
-                }
-            }
-            if (hasWon == true) {
-                break;
-            }
         }
 
         return hasWon;
@@ -204,47 +130,30 @@ public class Board {
     /**
      * check vertical win
      *
+     * @param color type
      * @return boolean
      */
-    public boolean checkVertical() {
-        // TODO implement here
-         boolean hasWon = false;
-        int count1 = 0;
-        int count2 = 0;
+    public boolean checkVertical(char color) {
+
+        boolean hasWon = false;
+        int count = 0;
+
         // check horizontal
         for (int i = 0; i < board[0].length; i++) {
             for (int j = 0; j < board.length; j++) {
-                if (board[j][i] == 'r') {
-                    count1 = count1 + 1;
+                if (board[j][i] == color) {
+                    count = count + 1;
 
-                    if (count1 == 4) {
+                    if (count == 4) {
                         hasWon = true;
+                        return hasWon;
 
                     }
                 } else {
-                    count1 = 0;
+                    count = 0;
                 }
             }
-            if (hasWon == true) {
-                break;
-            }
 
-        }
-
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] == 'y') {
-                    count2 = count2 + 1;
-                    if (count2 == 4) {
-                        hasWon = true;
-                    }
-                } else {
-                    count2 = 0;
-                }
-            }
-            if (hasWon == true) {
-                break;
-            }
         }
 
         return hasWon;
@@ -253,7 +162,9 @@ public class Board {
     /**
      * sets the board
      *
-     * @param board
+     * @param row of board
+     * @param col of board
+     * @param move by player
      */
     public void setBoard(int row, int col, char move) {
         // TODO implement here
@@ -263,15 +174,18 @@ public class Board {
     /**
      * get the board
      *
-     * @return char array
+     * @param row of board
+     * @param col of board
+     * @return board position
      */
     public char getBoard(int row, int col) {
-        // TODO implement here
+
         return board[row][col];
+
     }
 
     /**
-     * @return integer
+     * @return column number
      */
     public int getColumn() {
         // TODO implement here
@@ -279,21 +193,26 @@ public class Board {
     }
 
     /**
-     * @return integer
+     * @return row number
      */
     public int getRow() {
         // TODO implement here
         return row;
     }
 
+    /**
+     * print the board
+     */
     public void printBoard() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-
+                //player 1 , 2 and 3 if any    
                 if (board[i][j] == 'r') {
                     System.out.print("| r ");
                 } else if (board[i][j] == 'y') {
                     System.out.print("| y ");
+                } else if (board[i][j] == 'b') {
+                    System.out.print("| b ");
                 } else {
                     System.out.print("|   ");
                 }

@@ -1,19 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This program represents the computer player functionality
  */
 package bathassgn2req3;
-
-/**
- *
- * @author rahma
- */
 
 import java.util.*;
 
 /**
- * 
+ * the computer player class
  */
 public class ComputerPlayer extends Player {
 
@@ -23,25 +16,30 @@ public class ComputerPlayer extends Player {
     Random random;
 
     public ComputerPlayer() {
-        
-      random= new Random();
+
+        random = new Random();
     }
 
     /**
-     * returns the column chosen
-     * @return integer
+     * Allow computer move
+     *
+     * @return random integer for computer move
      */
-    public int chooseColumn(){
-        
-        return random.nextInt(7);
+    public int chooseColumn() {
+
+        return random.nextInt(7) + 1;
     }
 
     /**
-     * returns the column placed
-     * @return integer
+     * place counter for computer player
+     *
+     * @param move 
+     * @param player
+     * @param board
+     * @return board object
      */
-    public Board placeCounter(int move, char player, Board board){
-        
+    public Board placeCounter(int move, char player, Board board) {
+
         boolean placed = false;
 
         if (player == 'r') {
@@ -49,7 +47,7 @@ public class ComputerPlayer extends Player {
 
                 for (int j = 0; j < board.getColumn(); j++) {
                     if (!placed) {
-                        if (board.getBoard(i, move - 1) == 'y') {
+                        if (board.getBoard(i, move - 1) == 'y' || board.getBoard(i, move - 1) == 'b') {
 
                             continue;
 
@@ -57,7 +55,7 @@ public class ComputerPlayer extends Player {
                             //System.out.print("i: "+i+" j: "+j);
                             placed = true;
                             board.setBoard(i, move - 1, 'r');
-
+                            this.moves++;
                         }
                     }
 
@@ -66,12 +64,11 @@ public class ComputerPlayer extends Player {
             }
 
         }//player r
-        else {
+        else if (player == 'y') {
             for (int i = board.getRow() - 1; i >= 0; i--) {
-
                 for (int j = 0; j < board.getColumn(); j++) {
                     if (!placed) {
-                        if (board.getBoard(i, move - 1) == 'r') {
+                        if (board.getBoard(i, move - 1) == 'r' || board.getBoard(i, move - 1) == 'b') {
 
                             continue;
 
@@ -79,7 +76,7 @@ public class ComputerPlayer extends Player {
                             //System.out.print("i: "+i+" j: "+j);
                             placed = true;
                             board.setBoard(i, move - 1, 'y');
-
+                            this.moves++;
                         }
                     }
 
@@ -87,8 +84,29 @@ public class ComputerPlayer extends Player {
 
             }
 
-        }
+        } else if (player == 'b') {
 
+            for (int i = board.getRow() - 1; i >= 0; i--) {
+                for (int j = 0; j < board.getColumn(); j++) {
+                    if (!placed) {
+                        if (board.getBoard(i, move - 1) == 'r' || board.getBoard(i, move - 1) == 'y') {
+
+                            continue;
+
+                        } else if (board.getBoard(i, move - 1) != 'b') {
+                            //System.out.print("i: "+i+" j: "+j);
+                            placed = true;
+                            board.setBoard(i, move - 1, 'b');
+                            this.moves++;
+                        }
+                    }
+
+                }
+
+            }
+        } else if (this.moves == 42) {
+            System.out.println("Board full! No winners!");
+        }
         return board;
     }
 

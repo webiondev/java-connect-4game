@@ -1,69 +1,71 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This program represents the abstract player functionality
  */
 package bathassgn2req3;
-
-/**
- *
- * @author rahma
- */
 
 import java.util.*;
 
 /**
- * 
+ * the abstract class
  */
 public abstract class Player {
 
- 
     private int type;//player type 1. human 2. is computer
     private char playerColor;
     private int count;//count of match
+    protected int moves = 0; //check max moves
 
     /**
      * chooses a column to place move
+     *
      * @return integer
      */
     public abstract int chooseColumn();
 
     /**
      * places the choice in column
-     * @return integer
+     *
+     * @param move 
+     * @param type
+     * @param board
+     * @return board
      */
     public abstract Board placeCounter(int move, char type, Board board);
 
     /**
      * set player type
-     * @param integer 
+     *
+     * @param type
      */
     public void setType(int type) {
-       
-        this.type=type;
+
+        this.type = type;
     }
 
     /**
      * get player type
+     *
      * @return integer
      */
     public int getType() {
         // TODO implement here
-        return 0;
+        return this.type;
     }
-    
+
     /**
      * set player color
-     * @param integer 
+     *
+     * @param color
      */
     public void setPlayerColor(char color) {
-       
-        this.playerColor=color;
+
+        this.playerColor = color;
     }
 
     /**
      * get player color
-     * @return integer
+     *
+     * @return char
      */
     public char getColor() {
         // TODO implement here
@@ -72,20 +74,22 @@ public abstract class Player {
 
     /**
      * set count
-     * @param integer
+     *
+     * @param count
      */
     public void setCount(int count) {
         // TODO implement here
-        this.count=count;
-        
+        this.count = count;
+
     }
 
     /**
      * get count
-     * @return integer
+     *
+     * @return count
      */
     public int getCount() {
-       
+
         return this.count;
     }
 
